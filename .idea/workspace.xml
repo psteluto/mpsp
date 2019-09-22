@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="838fceb3-6c42-4a50-b18d-70ef3dc5be8b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-overrides.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Step1/Step1.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Step1/Step1.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/App/App.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/App/App.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/perfil.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Step1/Step1.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Step1/Step1.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/App/App.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App/App.module.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,10 +21,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1QN3zxFhCff4QR7wfoHJPGCrFiB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -38,14 +35,18 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="C:\Users\Vinicius\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\192.6603.19\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Vinicius\WebstormProjects\mpsp\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Vinicius\WebstormProjects\mpsp\src\images" />
+      <recent name="C:\Users\Vinicius\WebstormProjects\mpsp\src\components\CustomSearch" />
       <recent name="C:\Users\vbrandao\WebstormProjects\mpsp\src\pages\App" />
       <recent name="C:\Users\vbrandao\WebstormProjects\mpsp\src\components\Step1" />
       <recent name="C:\Users\vbrandao\WebstormProjects\mpsp" />
-      <recent name="C:\Users\vbrandao\WebstormProjects\mpsp\src\pages" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -86,6 +87,9 @@
       <option name="presentableId" value="Default" />
       <updated>1567597492819</updated>
       <workItem from="1567597494664" duration="6270000" />
+      <workItem from="1569035990445" duration="2831000" />
+      <workItem from="1569088947137" duration="4414000" />
+      <workItem from="1569093729748" duration="3700000" />
     </task>
     <servers />
   </component>
@@ -97,7 +101,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

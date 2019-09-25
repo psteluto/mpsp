@@ -1,0 +1,25 @@
+.login {
+    width: 45%;
+    height: max-content;
+    background: #fff;
+    box-shadow: 1px 1px 15px #0000006e;
+}
+.logo{
+    text-align: center;
+}
+.campos{
+    margin: 50px;
+    display: grid;
+    gap: 20px;
+}
+.fundo {
+    background-image: url("../../images/login.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}

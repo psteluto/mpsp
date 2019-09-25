@@ -1,7 +1,8 @@
 import React from 'react';
-import { Avatar, Button, Card, Col, Input, Row, Select, Steps, Typography, Checkbox } from 'antd';
+import { Avatar, Button, Card, Col, Input, Row, Select, Steps, Typography, Checkbox, Popconfirm } from 'antd';
 import appStyle from './App.module.scss';
 import perfil from '../../images/perfil.png'
+import logo from '../../images/logo-mpsp.png'
 
 const { Step } = Steps;
 const { Meta } = Card;
@@ -76,11 +77,28 @@ class App extends React.Component {
         this.setState({ checkedValues })
     }
 
+    confirmar(){
+        this.props.history.push('/')
+    }
+
     render() {
         const { current } = this.state;
         const firstStep = current === 0;
         return (
-            <div className={appStyle.steps}>
+            <>
+            <header className={appStyle.header}>
+                <img style={{width: "18%"}} alt={"picture"} src={logo}/>
+                <Popconfirm
+                    placement="bottomRight"
+                    title="Deseja sair?"
+                    onConfirm={() => this.confirmar()}
+                    okText="Sim"
+                    cancelText="Não"
+                >
+                    <Avatar style={{backgroundColor: '#000'}}>{"PS"}</Avatar>
+                </Popconfirm>
+            </header>
+           <div className={appStyle.steps}>
                 <Steps current={current}>
                     <Step title="Buscar" />
                     <Step title="Gerar Relatório" />
@@ -197,6 +215,7 @@ class App extends React.Component {
                         </div>
                     )}
             </div>
+            </>
         );
     }
 }

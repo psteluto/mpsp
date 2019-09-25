@@ -1,6 +1,13 @@
 .steps{
   margin: 100px 200px 100px 200px;
 }
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px #ccc;
+  padding: 10px;
+}
 .card{
   margin-top: 24px;
 }

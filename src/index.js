@@ -1,18 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './pages/App/App';
-import logo from './images/logo-mpsp.png'
 import * as serviceWorker from './serviceWorker';
-import { Divider } from 'antd';
+import Router from "./ReactRouter"
 
 ReactDOM.render(
 <>
-    <header>
-    <img style={{width: "18%"}} alt={"picture"} src={logo}/>
-    <hr style={{borderColor: '#fff'}} />
-    </header> 
-    <App />
+    <Router />
 </>
 , document.getElementById('root'));
 

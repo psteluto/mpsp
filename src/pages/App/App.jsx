@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Card, Col, Input, Row, Select, Steps, Typography, Checkbox, Popconfirm } from 'antd';
+import { Avatar, Button, Card, Col, Collapse, Input, Row, Select, Steps, Typography, Checkbox, Popconfirm } from 'antd';
 import appStyle from './App.module.scss';
 import perfil from '../../images/perfil.png'
 import logo from '../../images/logo-mpsp.png'
@@ -9,7 +9,7 @@ const { Meta } = Card;
 const { Option } = Select;
 const { Search } = Input;
 const { Text } = Typography;
-
+const {Panel} = Collapse
 
 const pessoas = [
     {
@@ -68,7 +68,7 @@ class App extends React.Component {
         } else if (tipoFiltro === "cpf") {
             let cpf = value.toLowerCase().replace(".", "").replace("-", "");
             this.setState({ filterPessoas: lista.filter((pessoa) => pessoa.cpf.toLowerCase().replace(".", "").replace("-", "").includes(cpf)) })
-        } else if (tipoFiltro === "cnpj") {
+        } else if (tipoFiltro === "rg") {
             this.setState({ filterPessoas: lista.filter((pessoa) => pessoa.nome.toLowerCase().includes(value.toLowerCase())) })
         }
     }
@@ -100,7 +100,7 @@ class App extends React.Component {
             </header>
            <div className={appStyle.steps}>
                 <Steps current={current}>
-                    <Step title="Buscar" />
+                    <Step title="Busca" />
                     <Step title="Gerar Relatório" />
                 </Steps>
                 {firstStep ? (
@@ -108,16 +108,32 @@ class App extends React.Component {
                         <div>
                             <Row>
                                 <Col span={12} offset={6}>
-                                    <Search className={appStyle.campo} addonBefore={
-                                        <Select defaultValue="cpf"
-                                            onChange={(value) => this.setState({ tipoFiltro: value })}>
-                                            <Option value="cpf">CPF</Option>
-                                            <Option value="nome">Nome</Option>
-                                            <Option value="cnpj">CNPJ</Option>
-                                        </Select>
-                                    } enterButton="Buscar"
-                                        onSearch={(value) => this.filter(pessoas, value, this.state.tipoFiltro)}
-                                        onChange={(e) => this.filter(pessoas, e.target.value, this.state.tipoFiltro)} />
+                                    <Collapse className={appStyle.collapse} bordered={false}>
+                                        <Panel header="Buscar uma pessoa existente" key="1">
+                                        {<Search addonBefore={
+                                            <Select defaultValue="cpf"
+                                                onChange={(value) => this.setState({ tipoFiltro: value })}>
+                                                <Option value="cpf">CPF</Option>
+                                                <Option value="nome">Nome</Option>
+                                                <Option value="rg">RG</Option>
+                                            </Select>
+                                        } enterButton="Buscar"
+                                            onSearch={(value) => this.filter(pessoas, value, this.state.tipoFiltro)}
+                                            onChange={(e) => this.filter(pessoas, e.target.value, this.state.tipoFiltro)} 
+                                        />}
+                                        </Panel>
+                                        
+                                        <Panel header="Cadastrar uma busca" key="2">
+                                        {<>
+                                            <Input className={appStyle.input} placeholder="RG"/>
+                                            <Input className={appStyle.input} placeholder="CPF"/>
+                                            <Input className={appStyle.input} placeholder="Nome"/>
+                                            <Input className={appStyle.input} placeholder="Número Processo - ARPENSP"/>
+                                            <Input className={appStyle.input} placeholder="PIS - Trabalhador"/>
+                                            <Button type="primary" style={{ float: "right", marginTop: "10px", marginBottom: "10px"}} onClick={() => alert("Solicitação cadastrada com sucesso")}>Cadastrar busca</Button>
+                                        </>}
+                                        </Panel>
+                                    </Collapse>
                                 </Col>
                             </Row>
                             <Row gutter={24}>

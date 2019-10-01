@@ -57,11 +57,13 @@ class App extends React.Component {
 
     cadastrarBusca(rg, cpfCnpj, numProcesso, pis) {
         var json = {
+            RegistroSolicitacao: {
             rg,
             cpfCnpj,
             numProcesso,
             pis,
-        };
+        }
+    };
         console.log(json);
     }
 
@@ -144,7 +146,7 @@ class App extends React.Component {
                                             <Input className={appStyle.input} placeholder="Nome" onChange={(e) => {this.setState({nome: e.target.value})}}/>
                                             <Input className={appStyle.input} placeholder="Número Processo - ARPENSP" onChange={(e) => {this.setState({numProcesso: e.target.value})}}/>
                                             <Input className={appStyle.input} placeholder="PIS - Trabalhador" onChange={(e) => {this.setState({pis: e.target.value})}}/>
-                                            <Button type="primary" style={{ float: "right", marginTop: "10px", marginBottom: "10px"}} onClick={() => this.cadastrarBusca(this.state.rg, this.state.cpfCnpj, this.state.nome, this.state.numProcesso, this.state.pis)}>Cadastrar busca</Button>
+                                            <Button type="primary" style={{ float: "right", marginTop: "10px", marginBottom: "10px"}} onClick={() => this.cadastrarBusca(this.state.rg, this.state.cpfCnpj, this.state.numProcesso, this.state.pis)}>Cadastrar busca</Button>
                                         </>}
                                         </Panel>
                                     </Collapse>

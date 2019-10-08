@@ -14,9 +14,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 0,
-            tipoFiltro: "cpf",
-            pessoaSelecionada: {},
+            tipoBusca: "cpf",
             rg: "",
             cpfCnpj: "",
             numProcesso: "",
@@ -36,13 +34,13 @@ class App extends React.Component {
         if(!cpfCnpj){
             message.error('Informar o CPF/CNPJ!!!!')
         }else{
-            Axios.post("https://127.0.0.1:9090/solicitacoes/registrarSolicitacao", {json}).then(()=> {message.success('Busca cadastrada com sucesso!')}).catch(() => {message.error('Não foi possível cadastrar, por favor tente mais tarde!')})
+            Axios.post("http://127.0.0.1:9090/solicitacoes/registrarSolicitacao", {json}).then(()=> {message.success('Busca cadastrada com sucesso!')}).catch((error) => {console.log(error)})
         }
         
     };  
 
-    buscar(tipoFiltro, value) {
-        Axios.get("127.0.0.1:9090/solicitacoes/buscarSolicitacoes", {params : {tipoFiltro: tipoFiltro, value: value}}).then((response)=> {this.setState({pessoa : response.data})}).catch(() => {})
+    buscar(tipoBusca, value) {
+        Axios.get("http://127.0.0.1:9090/solicitacoes/buscarSolicitacoes", {params : {tipoBusca: tipoBusca, value: value}}).then((response)=> {this.setState({pessoa : response.data})}).catch((error) => {console.log(error)})
     }
 
     getRelatorio(pessoaSelecionada) {
@@ -93,12 +91,12 @@ class App extends React.Component {
                                             <Panel header="Buscar uma pessoa existente" key="1">
                                             {<Search addonBefore={
                                                 <Select defaultValue="cpf"
-                                                    onChange={(value) => this.setState({ tipoFiltro: value })}>
+                                                    onChange={(value) => this.setState({ tipoBusca: value })}>
                                                     <Option value="cpf">CPF</Option>
                                                     <Option value="rg">RG</Option>
                                                 </Select>
                                             } enterButton="Buscar"                                        
-                                                onSearch={(value) => this.buscar(this.state.tipoFiltro, value)}
+                                                onSearch={(value) => this.buscar(this.state.tipoBusca, value)}
                                             />}
                                             </Panel>
                                             
@@ -115,9 +113,8 @@ class App extends React.Component {
                                         </Collapse>
                                     </Col>
                                 </Row>
-                                {
-                                    !this.state.pessoa &&
-                                    (
+                                { !this.state.pessoa &&
+                                    (                                
                                     <Col xs={24} sm={18} md={14} lg={10} xl={12} xxl={6} className={appStyle.card}>                            
                                             <Card actions={[<div
                                                 onClick={() => this.habilitarSelect(this.state.pessoa.status)}>Selecionar</div>]}>
@@ -147,7 +144,8 @@ class App extends React.Component {
                                                             </Row>
                                                         </Card>                                        
                                                     </Col>     
-                                    )}                           
+                                    )
+                                }                       
                             </div>
                         </div>                
                 </div>

@@ -17,34 +17,35 @@ class App extends React.Component {
             tipoBusca: "cpf",
             rg: "",
             cpfCnpj: "",
-            numProcesso: "",
-            pis: "",
-            pessoa: {}
+            numeroProcesso: "",
+            numeroPis: "",
+            pessoa: null
         };
     }
 
-    cadastrarBusca(rg, cpfCnpj, numProcesso, pis) {
+    cadastrarBusca(cpfCnpj, numeroProcesso, numeroPis, rg, nome) {
         var json = {
-            rg,
             cpfCnpj,
-            numProcesso,
-            pis,
+            numeroProcesso,
+            numeroPis,
+            rg,
+            nome
         }
 
         if(!cpfCnpj){
             message.error('Informar o CPF/CNPJ!!!!')
         }else{
-            Axios.post("http://127.0.0.1:9090/solicitacoes/registrarSolicitacao", {json}).then(()=> {message.success('Busca cadastrada com sucesso!')}).catch((error) => {console.log(error)})
+            Axios.post("http://127.0.0.1:9090/solicitacoes/registrarSolicitacao", json).then(()=> {message.success('Busca cadastrada com sucesso')}).catch(() => {message.error('Não foi possível cadastrar, tente novamente mais tarde')})
         }
         
     };  
 
     buscar(tipoBusca, value) {
-        Axios.get("http://127.0.0.1:9090/solicitacoes/buscarSolicitacoes", {params : {tipoBusca: tipoBusca, value: value}}).then((response)=> {this.setState({pessoa : response.data})}).catch((error) => {console.log(error)})
+        Axios.get("http://127.0.0.1:9090/solicitacoes/buscarSolicitacoes", {params : {tipoBusca: tipoBusca, value: value}}).then((response)=> {this.setState({pessoa : response.data[0]})}).catch(() => {message.error('Algo de errado aconteceu, contate o administrador do sistema')})
     }
 
-    getRelatorio(pessoaSelecionada) {
-        alert("Relatório");
+    getRelatorio(id) {
+        Axios.get("127.0.0.1:9090/solicitacoes/gerarRelatorio", {params: {id}})
     }
 
     confirmar(){
@@ -52,17 +53,19 @@ class App extends React.Component {
     }
 
     getAvatar(nome){
-        nome = "Paloma";
         return nome.charAt(0);
     }
 
     habilitarSelect(pessoa){
-        pessoa = "Concluido";
-        if(pessoa === "Concluido"){
-            this.getRelatorio(this.state.pessoa)
+        if(pessoa.status === "Concluido"){
+            this.getRelatorio(pessoa.id)
         }else{
             message.error('Essa busca ainda não foi concluída, tente novamente mais tarde')
         }
+    }
+
+    formataData(data){
+        return data[2] + "/" + data[1] + "/" + data[0];
     }
 
     render() {
@@ -105,19 +108,19 @@ class App extends React.Component {
                                                 <Input className={appStyle.input} placeholder="RG" onChange={(e) => {this.setState({rg: e.target.value})}}/>
                                                 <Input className={appStyle.input} placeholder="CPF/CNPJ" onChange={(e) => {this.setState({cpfCnpj: e.target.value})}}/>
                                                 <Input className={appStyle.input} placeholder="Nome" onChange={(e) => {this.setState({nome: e.target.value})}}/>
-                                                <Input className={appStyle.input} placeholder="Número Processo - ARPENSP" onChange={(e) => {this.setState({numProcesso: e.target.value})}}/>
-                                                <Input className={appStyle.input} placeholder="PIS - Trabalhador" onChange={(e) => {this.setState({pis: e.target.value})}}/>
-                                                <Button type="primary" style={{ float: "right", marginTop: "10px", marginBottom: "10px"}} onClick={() => this.cadastrarBusca(this.state.rg, this.state.cpfCnpj, this.state.nome, this.state.numProcesso, this.state.pis)}>Cadastrar busca</Button>
+                                                <Input className={appStyle.input} placeholder="Número Processo - ARPENSP" onChange={(e) => {this.setState({numeroProcesso: e.target.value})}}/>
+                                                <Input className={appStyle.input} placeholder="PIS - Trabalhador" onChange={(e) => {this.setState({numeroPis: e.target.value})}}/>
+                                                <Button type="primary" style={{ float: "right", marginTop: "10px", marginBottom: "10px"}} onClick={() => this.cadastrarBusca(this.state.cpfCnpj, this.state.numeroProcesso, this.state.numeroPis, this.state.rg, this.state.nome)}>Cadastrar busca</Button>
                                             </>}
                                             </Panel>
                                         </Collapse>
                                     </Col>
                                 </Row>
-                                { !this.state.pessoa &&
+                                { this.state.pessoa !== null && this.state.pessoa !== undefined ? 
                                     (                                
                                     <Col xs={24} sm={18} md={14} lg={10} xl={12} xxl={6} className={appStyle.card}>                            
                                             <Card actions={[<div
-                                                onClick={() => this.habilitarSelect(this.state.pessoa.status)}>Selecionar</div>]}>
+                                                onClick={() => this.habilitarSelect(this.state.pessoa)}>Selecionar</div>]}>
                                                 <Meta
                                                     avatar={<Avatar>{this.getAvatar(this.state.pessoa.nome)}</Avatar>}
                                                         title={(
@@ -138,12 +141,16 @@ class App extends React.Component {
                                                             <Row>
                                                             <div style={{ color: '#ccc', marginTop: 10, display: "flex", justifyContent: "flex-end" }}>
                                                                 <Tooltip title="Última atualização">                                    
-                                                                    <span style={{ marginLeft: 10}}>{this.state.pessoa.dataUltimaAtualizacao}</span>
+                                                                    <span style={{ marginLeft: 10}}>{this.formataData(this.state.pessoa.dataUltimaAtualizacao)}</span>
                                                                 </Tooltip>
                                                             </div>
                                                             </Row>
                                                         </Card>                                        
                                                     </Col>     
+                                    ) :
+                                    (
+                                        <>
+                                        </>
                                     )
                                 }                       
                             </div>

@@ -13,7 +13,7 @@ class Login extends React.Component {
     }
 
     login (login, senha){
-        if(login == "paloma" && senha == "paloma"){
+        if(login == "mpsp" && senha == "mpsp"){
             this.props.history.push('/home')
         }else{
             message.error('Usuário ou senha incorretos');
